@@ -1,0 +1,754 @@
+        
+ //practical 1a
+
+        
+//Write a program to create a class & implement a default, overloaded and copy constructor. 
+
+        class MyClass {
+            private int a;
+            public MyClass() {
+                System.out.println("Default Constructor");
+            }
+            public MyClass(int value) {
+                a = value;
+                System.out.println("Parameterized constructor and value is:" + a);
+            }
+            public MyClass(MyClass other) {
+                a = other.a;
+                System.out.println("Copy Constructor and value is:" + a);
+            }
+        }
+        class Pr1a {
+            public static void main(String[] args) {
+                MyClass ob1 = new MyClass();
+                MyClass ob2 = new MyClass(7);
+                MyClass ob3 = new MyClass(ob2);
+            }
+        }
+        
+ //Pr1b.java
+
+        
+//Write a program to create a class & implement the concept of Method Overloading. 
+
+        class OperOver {
+            public int add(int a, int b) {
+                return a + b;
+            }
+            public int add(int a, int b, int c) {
+                return a + b + c;
+            }
+        }
+        class Pr1b {
+            public static void main(String[] args) {
+                OperOver ob = new OperOver();
+                int sum1 = ob.add(5, 10);
+                int sum2 = ob.add(5, 10, 15);
+                System.out.println("Sum of two integers:" + sum1);
+                System.out.println("Sum of three integers:" + sum2);
+            }
+        }
+        
+ //Pr1c.java 
+
+        
+//Write a program to create a class & implement the concept of static methods. 
+
+        class DemoStaticMethods {
+            public static int add(int a, int b) {
+                return a + b;
+            }
+            public static int subtract(int a, int b) {
+                return a - b;
+            }
+        }
+        class Pr1c {
+            public static void main(String[] args) {
+                int sum = DemoStaticMethods.add(8, 4);
+                int diff = DemoStaticMethods.subtract(9, 5);
+                System.out.println("Sum:" + sum);
+                System.out.println("Difference:" + diff);
+            }
+        }
+        
+ //Pr2a.java 
+
+        
+//Write a program to implement a concepts of Inheritance and Method Overriding. 
+
+        class A {
+            void show() {
+                System.out.println("Base Class");
+            }
+        }
+        class B extends A {
+            void show() {
+                System.out.println("Derived Class");
+            }
+        }
+        class Pr2a {
+            public static void main(String[] args) {
+                B s = new B();
+                s.show();
+            }
+        }
+        
+ //Pr2b.java 
+
+        
+//Write a program to create a class & implement the concept of Abstract classes and methods. 
+
+        abstract class Shape {
+            public abstract double area();
+        }
+        class Circle extends Shape {
+            private double radius;
+            public Circle(double radius) {
+                this.radius = radius;
+            }
+            public double area() {
+                return Math.PI * radius * radius;
+            }
+        }
+        class Pr2b {
+            public static void main(String[] args) {
+                Circle c = new Circle(10.0);
+                System.out.println("Circle Area:" + c.area());
+            }
+        }
+        
+ //Pr2c.java 
+
+        
+//Write a program to implement the concept of interfaces. interface Shape 
+
+        interface Shape {
+            double area();
+            double perimeter();
+        }
+        class Circle implements Shape {
+            private double radius;
+            public Circle(double radius) {
+                this.radius = radius;
+            }
+            @Override
+            public double area() {
+                return Math.PI * radius * radius;
+            }
+            @Override
+            public double perimeter() {
+                return 2 * Math.PI * radius;
+            }
+        }
+        class Pr2c {
+            public static void main(String[] args) {
+                Circle c = new Circle(10.0);
+                System.out.println("Circle Area: " + c.area());
+                System.out.println("Circle Perimeter: " + c.perimeter());
+            }
+        }    
+        
+ //Pr3a.java 
+
+        
+//write a programm to raise write in exexption handling and rais then as per the requirement
+
+class Pr3a
+ {
+  public static void main(String[] args)
+  {
+   try
+  {
+    int result=divide (10,0);
+    System.out.println("Result:"+result);
+   }
+   catch (ArithmeticException e)
+   {
+    System.out.println("Error: division by zero");
+   }
+ }
+  public static int divide(int a,int b)
+ {
+  return a/b;
+ }
+}
+
+//practical 3b
+
+class CustomException extends Exception
+{
+  public CustomException(String message)
+  {
+   super(message);
+  }
+}
+class Pr3b
+{
+  public static void main(String[] args)
+  {
+   try
+   { 
+    int age=-20;
+    if (age< 0)
+    {
+     throw new CustomException("Age cannot be negative");
+    }
+    System.out.println("Age:"+age);
+    }
+    catch(CustomException e)
+    {
+    System.err.println("Error:"+e.getMessage());
+    }
+  }
+}>
+
+//Practical 4a.ColorChanger.java
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+import javax.swing.*;
+
+class ChangeColor extends JFrame {
+
+    private JPanel colorPanel;
+    private JButton changeColorButton;
+
+    public ChangeColor() {
+        setTitle("Random Color Changer");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        colorPanel = new JPanel();
+        changeColorButton = new JButton("Change Color");
+
+        add(colorPanel, BorderLayout.CENTER);
+        add(changeColorButton, BorderLayout.SOUTH);
+
+        changeColorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeColor();
+            }
+        });
+    }
+
+    private void changeColor() {
+        Random random = new Random();
+        Color randomColor = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        colorPanel.setBackground(randomColor);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            ChangeColor app = new ChangeColor();
+            app.setVisible(true);
+        });
+    }
+}
+
+
+
+//Practical 4b.ColorChanger.java
+
+
+//c)Create a swing application to demonstrate use of scrollpane to change its color selected using colour chooser.
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+class ColorChanger extends JFrame
+{
+	private JScrollPane scrollPane=new JScrollPane();
+	private JButton changeColorButton=new JButton("Change Color");
+	ColorChanger()
+	{
+	   setTitle("ScrollPane Color Change");
+	   setSize(400,300);
+	   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   setLayout(new BorderLayout());	  
+	   add(scrollPane,BorderLayout.CENTER);
+	   add(changeColorButton,BorderLayout.SOUTH);
+	   changeColorButton.addActionListener(new ActionListener(){
+	@Override
+	public void actionPerformed(ActionEvent e){
+	Color selectedColor=JColorChooser.showDialog(null,"Choose a color",scrollPane.getBackground());
+	if(selectedColor!=null){
+	scrollPane.getViewport().setBackground(selectedColor);
+	}
+	}
+	});
+	}
+	public static void main(String[] args)
+	{
+	   SwingUtilities.invokeLater(()->{
+	   new ColorChanger().setVisible(true);
+	   });
+	}
+}
+
+
+//Practical 4c.ShowFileInTextArea
+
+
+//c)Create a swing application to demonstrate use of TextArea using scrollpane to show contest of text file in textarea selected using file chooser.
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+class ShowFileInTextArea extends JFrame
+{
+	private JTextArea textArea=new JTextArea(20,40);
+	private JButton openFileButton=new JButton("Open File");
+	public ShowFileInTextArea()
+	{
+	   setTitle("File Viewer");
+	   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   setLayout(new BorderLayout());
+	   JScrollPane scrollPane=new JScrollPane(textArea);
+	   add(scrollPane,BorderLayout.CENTER);
+	   add(openFileButton,BorderLayout.SOUTH);
+	   openFileButton.addActionListener(new ActionListener(){
+	@Override
+	public void actionPerformed(ActionEvent e){
+	   openFile();
+	   }
+	});
+	pack();
+	setLocationRelativeTo(null);
+	}
+	private void openFile()
+	{
+	   JFileChooser fileChooser=new JFileChooser();	
+	   int result=fileChooser.showOpenDialog(this);
+	   if(result==JFileChooser.APPROVE_OPTION)
+	   {
+	 	try(BufferedReader reader=new BufferedReader(new FileReader(fileChooser.getSelectedFile())))
+		{
+		StringBuilder content=new StringBuilder();
+		String line;
+		while((line=reader.readLine())!=null){
+		content.append(line).append("\n");
+		}
+		textArea.setLineWrap(true);
+		textArea.setText(content.toString());
+		}
+		catch(IOException e)
+		{
+		JOptionPane.showMessageDialog(this,"Error reading the file","Error",JOptionPane.ERROR_MESSAGE);
+		}
+	   }
+	}
+	public static void main(String[] args)
+	{
+	   SwingUtilities.invokeLater(()->{
+	   new ShowFileInTextArea().setVisible(true);
+	   });
+	}
+}
+
+practical5.a Layout
+
+
+a)FlowLayout Example
+
+import javax.swing.*;
+import java.awt.*;
+class DemoFlowLayout
+{
+	public static void main(String[] args)
+	{
+	   JFrame frame=new JFrame("Flow Layout Example");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   frame.setSize(300,100);
+	   JPanel panel=new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	   JButton button1=new JButton("Button1");
+	   JButton button2=new JButton("Button2");
+	   JButton button3=new JButton("Button3");
+	   panel.add(button1);
+	   panel.add(button2);
+	   panel.add(button3);
+	   frame.add(panel);
+	   frame.setVisible(true);
+	}
+}
+
+
+//b)Grid Layout Example
+
+import java.awt.*;
+import javax.swing.*;
+class DemoGridLayout
+{
+	public static void main(String[] args)
+	{
+	   JFrame frame=new JFrame("Grid Layout Example");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   frame.setSize(300,300);
+	   JPanel panel=new JPanel(new GridLayout(2,3));
+	   JButton button1=new JButton("Button1");
+	   JButton button2=new JButton("Button2");
+	   JButton button3=new JButton("Button3");
+	   JButton button4=new JButton("Button4");
+	   JButton button5=new JButton("Button5");
+	   JButton button6=new JButton("Button6");
+	   panel.add(button1);
+	   panel.add(button2);
+	   panel.add(button3);
+	   panel.add(button4);
+	   panel.add(button5);
+	   panel.add(button6);
+	   frame.add(panel);
+	   frame.setVisible(true);
+	}
+}
+
+
+//c)BorderLayout Example
+
+import java.awt.*;
+import javax.swing.*;
+class DemoBorderLayout
+{
+	public static void main(String[] args)
+	{
+	   JFrame frame=new JFrame("Border Layout Example");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   frame.setSize(300,300);
+	   JButton northbutton=new JButton("North");
+	   JButton southbutton=new JButton("South");
+	   JButton eastbutton=new JButton("East");	   
+	   JButton westbutton=new JButton("West");
+	   JButton centerbutton=new JButton("Center");
+	   Container contentPane=frame.getContentPane();
+	   contentPane.setLayout(new BorderLayout());
+	   contentPane.add(northbutton,BorderLayout.NORTH);
+	   contentPane.add(southbutton,BorderLayout.SOUTH);
+	   contentPane.add(eastbutton,BorderLayout.EAST);
+	   contentPane.add(westbutton,BorderLayout.WEST);
+	   contentPane.add(centerbutton,BorderLayout.CENTER);
+	   frame.setVisible(true);
+	}
+}
+
+
+//Practical No. 06
+
+
+Demonstrate the use of Adapter Class in Event Handling
+
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+class MyAdapterClass
+{
+	public static void main(String[] args)
+	{
+	   SwingUtilities.invokeLater(()->{
+	   JFrame frame=new JFrame("MouseAdapter Demo");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   JLabel label=new JLabel();
+	   JPanel panel=new JPanel();
+	   panel.setPreferredSize(new Dimension(300,200));
+	   panel.addMouseListener(new MouseAdapter(){
+	   @Override
+	   public void mouseClicked(MouseEvent e){
+	     label.setText("Mouse Clicked at ("+e.getX()+","+e.getY()+")");
+	     }
+	   });
+	   panel.add(label);
+	   frame.add(panel);
+	   frame.pack();
+	   frame.setVisible(true);
+	  });
+	}
+}
+
+
+//Practical No. 07
+
+
+anymouse inner handling
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+class MyAnonymousInner
+{
+	public static void main(String[] args)
+	{
+	   SwingUtilities.invokeLater(()->{
+	   JFrame frame=new JFrame("Anonymous Inner Class");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   JPanel panel=new JPanel();
+	   panel.setPreferredSize(new Dimension(300,200));
+	   JButton button=new JButton("Click Here");
+	   button.addActionListener(new ActionListener(){
+	   @Override
+	   public void actionPerformed(ActionEvent e){
+	   JOptionPane.showMessageDialog(frame,"Button Clicked!");
+	   }
+	   });
+	   panel.add(button);
+	   frame.add(panel);
+	   frame.pack();
+	   frame.setVisible(true);
+	  });
+	}
+}
+
+//Practical No. 08:- Events
+
+
+//a)Write a program to demonstrate ActionEvent with Button Click
+
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+class BtnClkDemo
+{
+	public static void main(String[] args)
+	{
+	   JFrame frame=new JFrame("Button Click Demo");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   JButton button=new JButton("Click Me");
+	   button.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e){
+	      JOptionPane.showMessageDialog(frame,"Button Clicked!");
+	      }
+	     });
+	   frame.getContentPane().add(button);
+	   frame.pack();
+	   frame.setVisible(true);
+	}
+}
+
+//b)Write a program to demonstrate ActionEvent with Menu Item
+
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+class MenuItmClk
+{
+	public static void main(String[] args)
+	{
+	   JFrame frame=new JFrame("Menu Item Click Demo");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   JMenuBar menuBar=new JMenuBar();
+	   JMenu fileMenu=new JMenu("File");
+	   JMenuItem openItem=new JMenuItem("Open");
+	   JMenuItem saveItem=new JMenuItem("save");
+	   openItem.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e){
+	      JOptionPane.showMessageDialog(frame,"File->Open clicked!");
+	      }
+	     });
+	    saveItem.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e){
+	      JOptionPane.showMessageDialog(frame,"File->save clicked!");
+	      }
+	     });
+	   fileMenu.add(openItem);
+	    fileMenu.add(saveItem);
+	   menuBar.add(fileMenu);
+	   frame.setJMenuBar(menuBar);
+	   frame.setSize(400,300);
+	   frame.setVisible(true);
+	}
+}
+
+//c)Write a program to demonstrate ActionEvent with Text Field Enter Key Event
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+class TxtEntrKey {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Text Field Enter Key Demo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout()); // Setting Layout
+
+        JTextField textField = new JTextField(20);
+        
+        textField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Enter key pressed in text field");
+            }
+        });
+
+        frame.add(textField); // Use add() instead of getContentPane().add()
+        frame.setSize(400, 300);
+        frame.setVisible(true);
+    }
+}
+
+//d)Write a program to demonstrate MouseEvents
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+class AllMouseEvent
+{
+	public static void main(String[] args)
+	{
+	  SwingUtilities.invokeLater(()->{
+	    JFrame frame=new JFrame("Mouse Cllick Event Demo");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    JPanel panel=new JPanel();
+	    
+	    JLabel j1=new JLabel();
+	    panel.add(j1);
+	    panel.addMouseListener(new MouseAdapter(){
+	     @Override
+	     public void mouseClicked(MouseEvent e){
+	     JOptionPane.showMessageDialog(frame,"Mouse Clicked at("+e.getX()+","+e.getY()+")");
+	      }
+	   });
+	    panel.addMouseMotionListener(new MouseAdapter(){
+	     @Override
+	     public void mouseMoved(MouseEvent e){
+	    j1.setText("Mouse moved at("+e.getX()+","+e.getY()+")");
+	      }
+	   });
+	     panel.addMouseListener(new MouseAdapter(){
+	     @Override
+	     public void mouseEntered(MouseEvent e){
+	     frame.setTitle("Mouse Entered");
+	      }
+	     @Override
+	     public void mouseExited(MouseEvent e){
+	     frame.setTitle("Mouse Exited");
+	      }
+	   });
+	    frame.add(panel);
+	    frame.pack();
+	    frame.setSize(400,300);
+	    frame.setVisible(true);
+	  });
+	}
+}
+
+
+e)Write a program to demonstrate KeyEvents
+
+import java.awt.event.*;
+import javax.swing.*;
+class AllKeyEvents
+{
+	public static void main(String[] args)
+	{
+	   JFrame frame=new JFrame("All key Events");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   JTextField textField=new JTextField(20);
+	   frame.add(textField);
+	   textField.addKeyListener(new KeyAdapter(){
+	    @Override
+	    public void keyTyped(KeyEvent e){
+	     System.out.println("Key Typed:"+e.getKeyChar());
+	    }
+	    @Override
+	    public void keyPressed(KeyEvent e){
+	     System.out.println("Key Pressed:"+KeyEvent.getKeyText(e.getKeyCode()));
+	    }
+	    @Override
+	    public void keyReleased(KeyEvent e){
+	     System.out.println("Key Released:"+KeyEvent.getKeyText(e.getKeyCode()));
+	    }
+	   });
+	   frame.pack();
+	   frame.setVisible(true);
+	}
+}
+
+
+//f)Write a program to demonstrate SelectionEvent
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+class SelectionEvents
+{
+	public static void main(String[] args)
+	{
+	   SwingUtilities.invokeLater(()->{
+	   JFrame frame=new JFrame("Selection Event Demo");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   String[] items={"item1","item2","item3"};
+	   JComboBox comboBox=new JComboBox<>(items);
+	   comboBox.addActionListener(new ActionListener()
+	   {
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+		 String selectedItem=(String) comboBox.getSelectedItem();
+		 System.out.println("Selected:"+selectedItem);
+		}
+	    });
+	    frame.add(comboBox,BorderLayout.CENTER);
+	    frame.setSize(300,200);
+	    frame.setVisible(true);
+	   });
+	}
+}
+
+
+//g)Write a program to demonstrate FocusEvent
+
+import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import javax.swing.*;
+class AllFocusEvents
+{
+	public static void main(String[] args)
+	{
+	   SwingUtilities.invokeLater(()->{
+	   JFrame frame=new JFrame("Focus Event");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   JPanel panel=new JPanel();
+	   panel.setPreferredSize(new Dimension(300,200));
+	   JLabel label=new JLabel();
+	   JTextField textField1=new JTextField(25);
+	   JTextField textField2=new JTextField(25);
+	   textField1.addFocusListener(new FocusListener()
+	   {
+	     @Override
+	     public void focusGained(FocusEvent e)
+	     {
+		label.setText("Focus Gained");
+	     }
+	     @Override
+	     public void focusLost(FocusEvent e)
+	     {
+		label.setText("Focus Lost");
+	     }
+	   });
+	   panel.add(label);
+	   panel.add(textField1);
+	   panel.add(textField2);
+	   frame.add(panel);
+	   frame.setVisible(true);
+	  });
+	}
+}
+    
